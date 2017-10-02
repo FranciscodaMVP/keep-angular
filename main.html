@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<head><script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script></head>
+<script src="notebook.js"></script>  
+<body>
+    <div ng-app='notebook' ng-controller='notebookController'>
+    
+        <h2>notes</h2>
+    
+        <form ng-submit='addNote()'>
+            <input type ='text' ng-model='newNote.text'/>
+            <button type = "submit">save</button>
+            </form>
+            
+        <ul>
+            <li ng-repeat="note in notes">{{ note.text}} {{ note.id}}</li>
+        </ul>
+    
+
+    
+</body>
+</html>
