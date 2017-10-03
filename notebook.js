@@ -33,7 +33,6 @@ function Note (text) {
 }
 
 function notebookController($scope, NoteService) {
-    
     $scope.notes = NoteService.notes;
     $scope.onBlur = function () {
         let note = Note($scope.newNote);
@@ -42,7 +41,11 @@ function notebookController($scope, NoteService) {
         localStorage.setItem('oldNotes', JSON.stringify($scope.notes));
         //console.log($scope.notes);
         }
-    
+    $scope.update = function () { console.log(event)} 
+}
+
+function update () {
+    console.log('ehy');
 }
 
 function NoteService() {
@@ -59,3 +62,4 @@ function NoteService() {
 return notebook;
 }
 
+//https://fiddle.jshell.net/nbg58dto/

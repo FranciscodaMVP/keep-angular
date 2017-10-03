@@ -30,9 +30,13 @@
                         <hr class="divider">
                       </div>
                 
-            <ul>
-                <li ng-repeat="note in notes track by $index" class= "col-md-4">{{ note }}</li>
-            </ul>
+
+                <ul>
+                    <li ng-repeat="note in notes track by $index" class="col-md-4 panel panel-default noteSpace" id="{{note.date}}" ng-click="update()" ng-model="note.date">
+                        {{note}}
+                    </li>
+                </ul>
+            
         </div>
     
             <script src="notebook.js"></script> 
