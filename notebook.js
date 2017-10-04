@@ -25,6 +25,7 @@ function startNotes() {
 
 function Note (text) {
     let Note = {
+        'id' : setId(),
         'date' : new Date (),
         'note' : text.text,
         'modified' : '',
@@ -35,6 +36,8 @@ function Note (text) {
 function notebookController($scope, NoteService) {
     $scope.notes = NoteService.notes;
     $scope.onBlur = function () {
+        if ($scope.newNote.id) {updateNote($scope.newNote.id, $scope.newNote)}
+
         if ($scope.newNote && typeof $scope.newNote.text != 'undefined') {
             let note = Note($scope.newNote);
             NoteService.notes.push(note);
@@ -42,7 +45,7 @@ function notebookController($scope, NoteService) {
             localStorage.setItem('oldNotes', JSON.stringify($scope.notes));
         }}
         
-    $scope.update = function (text) { $scope.newNote = {text}; $scope.modified = true;}
+    $scope.updateNewNote = function (text, id) { $scope.newNote = {text}; $scope.newNote.id = id;}
 }
 
 
@@ -60,4 +63,15 @@ function NoteService() {
 return notebook;
 }
 
-//https://fiddle.jshell.net/nbg58dto/
+function updateNote (id, note) {
+    var updateNotes = NoteService.notes;
+    for (var a in updateNotes) {
+        if (updateNotes[a].id = id) { console.log(updateNotes[a])}
+    }
+    
+    
+}
+
+function setId() {
+    return new Date().getTime();
+}
