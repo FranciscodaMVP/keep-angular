@@ -17,11 +17,11 @@ angular
 // }
 
 
-// function startNotes() {
-//     if (localStorage.getItem('oldNotes')){
-//         NoteService.notes = (JSON.parse(localStorage.getItem('oldNotes')));
-//     }
-// }
+function startNotes() {
+    if (localStorage.getItem('oldNotes')){
+        NoteService.notes = (JSON.parse(localStorage.getItem('oldNotes')));
+    }
+}
 
 function Note (text) {
     let Note = {
@@ -35,18 +35,16 @@ function Note (text) {
 function notebookController($scope, NoteService) {
     $scope.notes = NoteService.notes;
     $scope.onBlur = function () {
-        let note = Note($scope.newNote);
-        NoteService.notes.push(note);
-        $scope.newNote = {};
-        localStorage.setItem('oldNotes', JSON.stringify($scope.notes));
-        //console.log($scope.notes);
-        }
-    $scope.update = function () { console.log(event)} 
+        if ($scope.newNote && typeof $scope.newNote.text != 'undefined') {
+            let note = Note($scope.newNote);
+            NoteService.notes.push(note);
+            $scope.newNote = {};
+            localStorage.setItem('oldNotes', JSON.stringify($scope.notes));
+        }}
+        
+    $scope.update = function (text) { $scope.newNote = {text}; $scope.modified = true;}
 }
 
-function update () {
-    console.log('ehy');
-}
 
 function NoteService() {
     if (localStorage.getItem('oldNotes')){
