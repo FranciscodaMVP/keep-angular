@@ -36,10 +36,10 @@ function Note (text) {
 function notebookController($scope, NoteService) {
     $scope.notes = NoteService.notes;
     $scope.onBlur = function () {
-        if ($scope.newNote.id) {updateNote($scope.newNote.id, $scope.newNote)}
+        if ($scope.newNote && $scope.newNote.id) { console.log ($scope.newNote.id); updateNote($scope, $scope.newNote.id, $scope.newNote)}
 
-        if ($scope.newNote && typeof $scope.newNote.text != 'undefined') {
-            let note = Note($scope.newNote);
+        if ($scope.newNote && typeof $scope.newNote.text != 'undefined' ) {
+            let note =  Note($scope.newNote);
             NoteService.notes.push(note);
             $scope.newNote = {};
             localStorage.setItem('oldNotes', JSON.stringify($scope.notes));
@@ -55,7 +55,7 @@ function NoteService() {
             notes : (JSON.parse(localStorage.getItem('oldNotes')))
             
         }
-        console.log(notebook);
+        //console.log(notebook);
     } else {var notebook = {
         notes: [] }
     }
@@ -63,13 +63,16 @@ function NoteService() {
 return notebook;
 }
 
-function updateNote (id, note) {
-    var updateNotes = NoteService.notes;
-    for (var a in updateNotes) {
-        if (updateNotes[a].id = id) { console.log(updateNotes[a])}
+function updateNote ($scope, id, note) {
+    
+    for (var a in $scope.notes) {
+        if ($scope.notes[a].id === id) { 
+            $scope.notes[a].note = note.text;
+            $scope.notes[a].modified = new Date ();
+            localStorage.setItem('oldNotes', JSON.stringify($scope.notes));
+            $scope.newNote = {};
+        }       
     }
-    
-    
 }
 
 function setId() {

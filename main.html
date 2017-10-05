@@ -32,8 +32,8 @@
                 
 
                 <ul>
-                    <li ng-repeat="note in notes track by $index" class="col-md-4 panel panel-default noteSpace" id="{{note.date}}" ng-click="updateNewNote(note.note, note.id)">
-                        {{note}}
+                    <li ng-repeat="note in notes track by $index" class="col-md-4 panel panel-default noteSpace" id="{{note.id}}" ng-click="updateNewNote(note.note, note.id)">
+                        {{note.note + ' ' + note.id}}             
                     </li>
                 </ul>
             
