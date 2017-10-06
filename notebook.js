@@ -46,6 +46,8 @@ function notebookController($scope, NoteService) {
         }}
         
     $scope.updateNewNote = function (text, id) { $scope.newNote = {text}; $scope.newNote.id = id;}
+
+    $scope.deleteNote = function (id) {killNote ($scope, id)}
 }
 
 
@@ -77,4 +79,13 @@ function updateNote ($scope, id, note) {
 
 function setId() {
     return new Date().getTime();
+}
+
+function killNote ($scope, id) {
+    for (var a in $scope.notes) {
+        if ($scope.notes[a].id === id) {
+            //console.log($scope.notes[a]);
+            $scope.notes.splice(a,1);
+        }
+    }
 }
